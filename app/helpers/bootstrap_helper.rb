@@ -5,7 +5,7 @@ module BootstrapHelper
     flash.map do |name, msg|
       next if msg.empty?
 
-      content_tag :div, id: 'error_messages', class: "flash alert #{flash_class[name.to_sym]} fade in", 'data-alert' => 'true' do
+      content_tag :div, id: 'error_messages', class: "flash alert #{flash_class[name.to_sym]}", role: :alert do
         content = []
         content << link_to('&times;'.html_safe, '#', class: 'close', :"data-dismiss" => 'alert')
         content << msg

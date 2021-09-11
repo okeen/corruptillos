@@ -8,6 +8,7 @@ class CorruptionCasesController < ApplicationController
     if @corruption_case.save
       redirect_to [:corruption_cases], notice: t(".success")
     else
+      flash.now[:error] = t('.failure')
       render "new"
     end
   end
@@ -25,7 +26,17 @@ class CorruptionCasesController < ApplicationController
     if @corruption_case.update(permitted_params)
       redirect_to [:corruption_cases], notice: t(".success")
     else
+      flash.now[:error] = t('.failure')
       render "edit"
+    end
+  end
+
+  def destroy
+    @corruption_case = collection.find(params[:id])
+    if @corruption_case.destroy
+      redirect_to [:corruption_cases], notice: t(".success")
+    else
+      redirect_to [:corruption_cases], error: t(".failure")
     end
   end
 

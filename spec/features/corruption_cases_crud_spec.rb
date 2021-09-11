@@ -87,6 +87,18 @@ RSpec.feature "Corruption cases CRUD", :type => :feature do
       expect(@case.sentence).to eq updated_case_attributes[:sentence]
       expect(@case.european_funds_project).to eq updated_case_attributes[:european_funds_project]
     end
+  end
 
+  scenario "Delete an exisiting case", js: true do
+    @case = CorruptionCase.last
+    visit corruption_cases_path
+
+    within "table#corruption_cases tr#corruption_case_#{@case.id}" do
+      click_link "Delete"
+      page.driver.browser.switch_to.alert.accept
+      sleep(0.01)
+    end
+
+    expect { @case.reload }.to raise_exception(ActiveRecord::RecordNotFound)
   end
 end
