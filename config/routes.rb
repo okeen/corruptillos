@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
-  get "home/index"
-  root to: "home#index"
+  resources :corruption_cases, except: :show
+
+  root to: "corruption_cases#index"
 end

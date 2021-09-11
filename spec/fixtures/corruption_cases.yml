@@ -1,0 +1,14 @@
+basic_case:
+  name: 'Basic case name'
+  place: 'Madrid, Spain'
+  stolen_amount: 1000
+
+guilty_case:
+  name: 'Guilty case name'
+  stolen_amount: 1000
+  description: 'Guilty case description'
+  place: 'Madrid, Spain'
+  trial_start_at: 1.year.ago
+  sentenced_at: 6.months.ago
+  sentence: 'guilty'
+  european_funds_project: '1234567'
