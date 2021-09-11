@@ -1,0 +1,10 @@
+%tr[corruption_case]
+  %td= corruption_case.name
+  %td= corruption_case.place
+  %td= corruption_case.stolen_amount
+  %td= corruption_case.trial_start_at
+  %td= corruption_case.sentence
+  %td
+    .btn-group
+      = button_link_to(t('actions.edit'), [:edit, corruption_case])
+      = button_link_to(t('actions.delete'), [corruption_case], method: :destroy, data: { confirm: t("actions.ask_confirm") })

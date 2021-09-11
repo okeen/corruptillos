@@ -31,6 +31,21 @@ RSpec.feature "Corruption cases CRUD", :type => :feature do
     expect(@new_case.sentenced_at).to eq case_attributes[:sentenced_at]
     expect(@new_case.sentence).to eq case_attributes[:sentence]
     expect(@new_case.european_funds_project).to eq case_attributes[:european_funds_project]
+  end
 
+  scenario "View all the corruption cases" do
+    visit "/corruption_cases/"
+
+    within 'table#corruption_cases' do
+      CorruptionCase.all.each do |corruption_case|
+        within "tr#corruption_case_#{corruption_case.id}" do
+          expect(page).to have_selector "td", text: corruption_case.name
+          expect(page).to have_selector "td", text: corruption_case.stolen_amount
+          expect(page).to have_selector "td", text: corruption_case.place
+          expect(page).to have_selector "td", text: corruption_case.trial_start_at.to_s
+          expect(page).to have_selector "td", text: corruption_case.sentence
+        end
+      end
+    end
   end
 end

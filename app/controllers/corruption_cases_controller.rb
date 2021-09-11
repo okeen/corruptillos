@@ -12,6 +12,10 @@ class CorruptionCasesController < ApplicationController
     end
   end
 
+  def index
+    @corruption_cases = collection.all
+  end
+
   protected
 
   def collection

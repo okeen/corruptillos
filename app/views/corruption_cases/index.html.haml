@@ -1,2 +1,3 @@
-%h1 CorruptionCases#index
-%p Find me in app/views/corruption_cases/index.html.haml
+%h1 All corruption cases
+
+= table_for @corruption_cases, { partial: 'corruption_case' }, :name, :place, :stolen_amount, :trial_started_at, :sentence, :actions
