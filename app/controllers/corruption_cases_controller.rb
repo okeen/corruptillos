@@ -16,6 +16,19 @@ class CorruptionCasesController < ApplicationController
     @corruption_cases = collection.all
   end
 
+  def edit
+    @corruption_case = collection.find(params[:id])
+  end
+
+  def update
+    @corruption_case = collection.find(params[:id])
+    if @corruption_case.update(permitted_params)
+      redirect_to [:corruption_cases], notice: t(".success")
+    else
+      render "edit"
+    end
+  end
+
   protected
 
   def collection
