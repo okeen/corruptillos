@@ -5,8 +5,20 @@ require File.expand_path('../config/environment', __dir__)
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
-# Add additional requires below this line. Rails is not loaded until this point!
 
+Capybara.server_host = ENV["TEST_APP_HOST"] || 'web'
+Capybara.server_port = ENV["TEST_PORT"] || 3001
+Capybara.javascript_driver = :selenium
+
+caps = Selenium::WebDriver::Remote::Capabilities.chrome("chromeOptions" => {"args" => ['--no-default-browser-check', '--headless']})
+Capybara.register_driver :selenium do |app|
+  Capybara::Selenium::Driver.new(
+    app,
+    browser: :remote,
+    url: "http://#{ENV['SELENIUM_HOST']}:#{ENV['SELENIUM_PORT']}/wd/hub",
+    desired_capabilities: caps
+  )
+end
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end

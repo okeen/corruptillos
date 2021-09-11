@@ -18,6 +18,13 @@ services:
     volumes:
       - 'redis:/data'
 
+  selenium:
+    image: 'selenium/standalone-chrome-debug'
+    logging:
+      driver: none
+    stdin_open: true
+    tty: true
+
   web:
     depends_on:
       - 'db'
@@ -28,6 +35,10 @@ services:
       - '3000:3000'
     environment:
       - DATABASE_HOST=db
+      - SELENIUM_HOST=selenium
+      - SELENIUM_PORT=4444
+      - TEST_APP_HOST=web
+      - TEST_PORT=3001
     volumes:
       - .:/project
 
