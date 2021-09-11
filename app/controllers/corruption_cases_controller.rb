@@ -18,11 +18,11 @@ class CorruptionCasesController < ApplicationController
   end
 
   def edit
-    @corruption_case = collection.find(params[:id])
+    @corruption_case = collection.find_by(slug: params[:slug])
   end
 
   def update
-    @corruption_case = collection.find(params[:id])
+    @corruption_case = collection.find_by(slug: params[:slug])
     if @corruption_case.update(permitted_params)
       redirect_to [:corruption_cases], notice: t(".success")
     else
@@ -32,7 +32,7 @@ class CorruptionCasesController < ApplicationController
   end
 
   def destroy
-    @corruption_case = collection.find(params[:id])
+    @corruption_case = collection.find_by(slug: params[:slug])
     if @corruption_case.destroy
       redirect_to [:corruption_cases], notice: t(".success")
     else

@@ -21,7 +21,7 @@ RSpec.feature "Corruption cases CRUD", :type => :feature do
     visit new_corruption_case_path
 
     within "#new_corruption_case" do
-      fill_in "Name", with: case_attributes[:name]
+      fill_in "Name", with: "New name"
       fill_in "Description", with: case_attributes[:description]
       fill_in "Stolen amount", with: case_attributes[:stolen_amount]
       fill_in "Place", with: case_attributes[:place]
@@ -35,7 +35,7 @@ RSpec.feature "Corruption cases CRUD", :type => :feature do
 
     @new_case = CorruptionCase.last
 
-    expect(@new_case.name).to eq case_attributes[:name]
+    expect(@new_case.name).to eq 'New name'
     expect(@new_case.description).to eq case_attributes[:description]
     expect(@new_case.stolen_amount).to eq case_attributes[:stolen_amount]
     expect(@new_case.place).to eq case_attributes[:place]
@@ -96,7 +96,7 @@ RSpec.feature "Corruption cases CRUD", :type => :feature do
     within "table#corruption_cases tr#corruption_case_#{@case.id}" do
       click_link "Delete"
       page.driver.browser.switch_to.alert.accept
-      sleep(0.01)
+      sleep(0.1)
     end
 
     expect { @case.reload }.to raise_exception(ActiveRecord::RecordNotFound)

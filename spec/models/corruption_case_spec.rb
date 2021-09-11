@@ -8,7 +8,6 @@ RSpec.describe CorruptionCase, type: :model do
     subject(:a_case) { corruption_cases("basic_case") }
 
     context "with valid attributes" do
-
       it "is valid" do
         expect(a_case).to be_valid
       end
@@ -23,6 +22,16 @@ RSpec.describe CorruptionCase, type: :model do
         it "is invalid" do
           expect(a_case).not_to be_valid
         end
+      end
+    end
+
+    context "with a non unique name" do
+      before do
+        a_case.name = corruption_cases("guilty_case").name
+      end
+
+      it "is invalid" do
+        expect(a_case).not_to be_valid
       end
     end
 
@@ -44,6 +53,24 @@ RSpec.describe CorruptionCase, type: :model do
           subject.sentence = sentence
           expect(subject).to be_valid
         end
+      end
+    end
+
+    describe "save" do
+      it "calls set_slug" do
+        expect(subject).to receive(:set_slug)
+        subject.save
+      end
+    end
+
+    describe "set_slug" do
+      before do
+        subject.name = "Foo bar"
+      end
+
+      it "sets the slug attribute to the parameterized name" do
+        subject.send(:set_slug)
+        expect(subject.slug).to eq "foo-bar"
       end
     end
   end

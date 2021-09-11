@@ -2,9 +2,10 @@ basic_case:
   name: 'Basic case name'
   place: 'Madrid, Spain'
   stolen_amount: 1000
-
+  slug: 'basic-case-name'
 guilty_case:
   name: 'Guilty case name'
+  slug: 'guilty-case-name'
   stolen_amount: 1000
   description: 'Guilty case description'
   place: 'Madrid, Spain'
