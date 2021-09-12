@@ -1,3 +1,7 @@
 basic_user:
   email: 'me@example.com'
   encrypted_password: '$2a$12$OmTpQcJQmNLc73D8P443nezlNqFHU09y6IvVLc6VSYvnNVg7QEFoK'
+other_user:
+  email: 'you@example.com'
+  encrypted_password: '$2a$12$OmTpQcJQmNLc73D8P443nezlNqFHU09y6IvVLc6VSYvnNVg7QEFoK'
+
