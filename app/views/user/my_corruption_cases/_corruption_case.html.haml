@@ -6,5 +6,5 @@
   %td= corruption_case.sentence
   %td
     .btn-group
-      = button_link_to(t('actions.edit'), [:edit, corruption_case])
-      = button_link_to(t('actions.delete'), [corruption_case], method: :delete, data: { confirm: t("actions.ask_confirm") })
+      = button_link_to(t('actions.edit'), [:edit, :user, corruption_case])
+      = button_link_to(t('actions.delete'), [:user, corruption_case], method: :delete, data: { confirm: t("actions.ask_confirm") })

@@ -1,4 +1,4 @@
-= simple_form_for @corruption_case do |f|
+= simple_form_for @corruption_case, url: [:user, @corruption_case] do |f|
   = f.input :name
   = f.input :description, as: :text
   = f.input :stolen_amount, as: :integer

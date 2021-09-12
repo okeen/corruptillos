@@ -1,4 +1,4 @@
-class CorruptionCasesController < ApplicationController
+class User::MyCorruptionCasesController < User::BaseController
   def new
     @corruption_case = collection.new
   end
@@ -6,7 +6,7 @@ class CorruptionCasesController < ApplicationController
   def create
     @corruption_case = collection.new(permitted_params)
     if @corruption_case.save
-      redirect_to [:corruption_cases], notice: t(".success")
+      redirect_to after_action_path, notice: t(".success")
     else
       flash.now[:error] = t('.failure')
       render "new"
@@ -24,7 +24,7 @@ class CorruptionCasesController < ApplicationController
   def update
     @corruption_case = collection.find_by(slug: params[:slug])
     if @corruption_case.update(permitted_params)
-      redirect_to [:corruption_cases], notice: t(".success")
+      redirect_to after_action_path, notice: t(".success")
     else
       flash.now[:error] = t('.failure')
       render "edit"
@@ -34,20 +34,24 @@ class CorruptionCasesController < ApplicationController
   def destroy
     @corruption_case = collection.find_by(slug: params[:slug])
     if @corruption_case.destroy
-      redirect_to [:corruption_cases], notice: t(".success")
+      redirect_to after_action_path, notice: t(".success")
     else
-      redirect_to [:corruption_cases], error: t(".failure")
+      redirect_to after_action_path, error: t(".failure")
     end
   end
 
   protected
 
   def collection
-    CorruptionCase.all
+    current_user.corruption_cases.all
   end
 
   def permitted_params
     params.require(:corruption_case).permit(:name, :description, :stolen_amount, :place, :trial_start_at,
                                             :sentenced_at, :sentence, :european_funds_project)
+  end
+
+  def after_action_path
+    [:user, :corruption_cases]
   end
 end
