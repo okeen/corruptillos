@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe User::MyCorruptionCasesController, type: :controller do
+describe My::CorruptionCasesController, type: :controller do
   fixtures(:users)
 
   context "without a logged in user" do

@@ -1,4 +1,4 @@
 
-%h1 All corruption cases
-= button_link_to t('.new'), [:new, :user, :corruption_case], class: 'btn-primary'
+%h1 My corruption cases
+= button_link_to t('.new'), [:new, :my, :corruption_case], class: 'btn-primary'
 = table_for @corruption_cases, { partial: 'corruption_case' }, :name, :place, :stolen_amount, :trial_started_at, :sentence, :actions

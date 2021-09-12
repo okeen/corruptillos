@@ -1,4 +1,4 @@
-class User::MyCorruptionCasesController < User::BaseController
+class My::CorruptionCasesController < My::BaseController
   def new
     @corruption_case = collection.new
   end
@@ -52,6 +52,6 @@ class User::MyCorruptionCasesController < User::BaseController
   end
 
   def after_action_path
-    [:user, :corruption_cases]
+    [:my, :corruption_cases]
   end
 end

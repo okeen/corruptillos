@@ -23,7 +23,7 @@ RSpec.feature "Corruption cases CRUD", :type => :feature, has_users: true do
   end
 
   scenario "Create a new case" do
-    visit new_user_corruption_case_path
+    visit new_my_corruption_case_path
 
     within "#new_corruption_case" do
       fill_in "Name", with: "New name"
@@ -51,7 +51,7 @@ RSpec.feature "Corruption cases CRUD", :type => :feature, has_users: true do
   end
 
   scenario "View all the corruption cases" do
-    visit user_corruption_cases_path
+    visit my_corruption_cases_path
 
     within 'table#corruption_cases' do
       CorruptionCase.all.each do |corruption_case|
@@ -68,7 +68,7 @@ RSpec.feature "Corruption cases CRUD", :type => :feature, has_users: true do
 
   scenario "Update an existing corruption case" do
     @case = CorruptionCase.last
-    visit edit_user_corruption_case_path(@case)
+    visit edit_my_corruption_case_path(@case)
 
     within "#edit_corruption_case_#{@case.id}" do
       fill_in "Name", with: updated_case_attributes[:name]
@@ -96,7 +96,7 @@ RSpec.feature "Corruption cases CRUD", :type => :feature, has_users: true do
 
   scenario "Delete an exisiting case", js: true do
     @case = CorruptionCase.last
-    visit user_corruption_cases_path
+    visit my_corruption_cases_path
 
     within "table#corruption_cases tr#corruption_case_#{@case.id}" do
       click_link "Delete"
