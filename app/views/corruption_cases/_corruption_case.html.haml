@@ -4,7 +4,4 @@
   %td= corruption_case.stolen_amount
   %td= corruption_case.trial_start_at
   %td= corruption_case.sentence
-  %td
-    .btn-group
-      = button_link_to(t('actions.edit'), [:edit, corruption_case])
-      = button_link_to(t('actions.delete'), [corruption_case], method: :delete, data: { confirm: t("actions.ask_confirm") })
+  %td= corruption_case.user&.email
