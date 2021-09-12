@@ -10,6 +10,11 @@ class CorruptionCase < ApplicationRecord
 
   before_save :set_slug
 
+  scope :for_day, lambda { |day|
+    day ||= Date.today
+    where(created_at: [day.beginning_of_day .. day.end_of_day])
+  }
+
   def to_param
     return nil unless persisted?
     slug

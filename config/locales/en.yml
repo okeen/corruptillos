@@ -4,3 +4,7 @@ en:
     ask_confirm: "Are you sure?"
     edit: "Edit"
     delete: "Delete"
+
+  reports_mailer:
+    user_corruption_cases:
+      subject: 'Daily corruption review'
