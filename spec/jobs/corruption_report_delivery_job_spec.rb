@@ -4,14 +4,12 @@ RSpec.describe CorruptionReportDeliveryJob, type: :job do
   include ActiveJob::TestHelper
 
   subject(:job) { described_class.perform_later(report) }
-
   let(:report) { DailyCorruptionReport.create(day: Date.today) }
 
   describe "perform" do
-    let(:an_email) { instance_double(Mail::Message, deliver_later: nil)}
-
+    let(:a_mock) { double('something', deliver_later: nil)}
     before do
-      allow(ReportsMailer).to receive(:user_corruption_cases).and_return(an_email)
+      allow(ReportsMailer).to receive(:user_corruption_cases).and_return(a_mock)
     end
 
     it 'Invokes ReportMailer for every valid destinatary' do
@@ -19,6 +17,15 @@ RSpec.describe CorruptionReportDeliveryJob, type: :job do
         expect(ReportsMailer).to receive(:user_corruption_cases).with(user, report)
       end
       perform_enqueued_jobs { job }
+    end
+
+    context "with an empty report" do
+      subject(:job) { described_class.perform_later(nil) }
+
+      it 'returns via the guard clause' do
+        expect(ReportsMailer).not_to receive(:user_corruption_cases)
+        perform_enqueued_jobs { job }
+      end
     end
   end
 

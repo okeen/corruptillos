@@ -2,7 +2,9 @@ class CorruptionReportDeliveryJob < ApplicationJob
   queue_as :default
   attr_accessor :day
 
-  def perform(report = nil)
+  def perform(report)
+    return if report.blank?
+
     per_valid_destinatary do |user|
       ReportsMailer.user_corruption_cases(user, report).deliver_later
     end
