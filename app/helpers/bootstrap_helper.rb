@@ -105,4 +105,25 @@ module BootstrapHelper
     table = content_tag(:table, "#{thead} #{tbody}".html_safe, id: table_id, class: "table table-hover #{classes}")
     table.html_safe
   end
+
+  def navbar(klazz = :light)
+    content_tag(:nav, class: "navbar navbar-#{klazz} bg-#{klazz}") do
+      content_tag :div, class: "container-fluid" do
+        yield
+      end
+    end
+  end
+
+  def navbar_brand
+    link_to t("logo"), [:root], class: 'navbar-brand'
+  end
+
+  def navbar_link(name, url)
+    link_class = "nav-link"
+    link_class << " active" if url_for(url) == url_for(only_path: true)
+
+    content_tag :li, class: 'nav-item' do
+      link_to name, url, class: link_class
+    end
+  end
 end

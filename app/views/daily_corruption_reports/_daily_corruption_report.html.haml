@@ -1,0 +1,8 @@
+%tr[daily_corruption_report]
+  %td= daily_corruption_report.day
+  %td= daily_corruption_report.total_cases
+  %td= daily_corruption_report.total_stolen_amount
+  %td= link_to t("actions.download"), daily_corruption_report.csv_file.url
+  %td
+    .btn-group
+      = button_link_to t("actions.view"), [daily_corruption_report]

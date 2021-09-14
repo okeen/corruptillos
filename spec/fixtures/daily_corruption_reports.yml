@@ -1,0 +1,8 @@
+first_report:
+  day: Date.yesterday
+  total_cases: 10
+  total_stolen_amount: 1000
+second_report:
+  day: Date.today
+  total_cases: 10
+  total_stolen_amount: 1000

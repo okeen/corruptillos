@@ -1,0 +1,13 @@
+= navbar_brand
+
+%ul.navbar-nav
+  = navbar_link "Corruption Cases", [:corruption_cases]
+  = navbar_link "Daily Reports", [:daily_corruption_reports]
+
+.d-inline-flex
+  - if current_user.present?
+    = button_link_to "My Cases", [:my, :corruption_cases], class: 'btn-primary mx-2'
+    = button_link_to "Logout", destroy_user_session_path, class: 'btn-danger', :method => :delete
+  - else
+    = button_link_to "Login", [:new, :user, :session], class: 'btn-primary mx-2'
+    = button_link_to "Create Account", new_user_registration_path, class: 'btn-success mx-2'
