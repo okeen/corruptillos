@@ -4,7 +4,7 @@ RSpec.describe CorruptionReportDeliveryJob, type: :job do
   include ActiveJob::TestHelper
 
   subject(:job) { described_class.perform_later(report) }
-  let(:report) { DailyCorruptionReport.create(day: Date.today) }
+  let(:report) { DailyCorruptionReport.create(day: Date.today, total_stolen: 0) }
 
   describe "perform" do
     let(:a_mock) { double('something', deliver_later: nil)}

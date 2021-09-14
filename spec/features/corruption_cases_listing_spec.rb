@@ -17,7 +17,7 @@ RSpec.feature "Corruption cases listing", :type => :feature do
       CorruptionCase.all.each do |corruption_case|
         within "tr#corruption_case_#{corruption_case.id}" do
           expect(page).to have_selector "td", text: corruption_case.name
-          expect(page).to have_selector "td", text: corruption_case.stolen_amount
+          expect(page).to have_selector "td", text: corruption_case.stolen.format
           expect(page).to have_selector "td", text: corruption_case.place
           expect(page).to have_selector "td", text: corruption_case.trial_start_at.to_s
           expect(page).to have_selector "td", text: corruption_case.sentence

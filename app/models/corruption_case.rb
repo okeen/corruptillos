@@ -1,5 +1,6 @@
 class CorruptionCase < ApplicationRecord
   enum sentence: [:pending, :innocent, :non_guilty, :guilty]
+  monetize :stolen_amount, as: :stolen
 
   belongs_to :user, required: false
 

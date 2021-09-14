@@ -9,7 +9,7 @@
   .col-md
     %p
       %strong Total stolen:
-      = @daily_corruption_report.total_stolen_amount
+      = @daily_corruption_report.total_stolen.format
 
 = link_to_report_file
 

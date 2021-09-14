@@ -47,7 +47,7 @@ class My::CorruptionCasesController < My::BaseController
   end
 
   def permitted_params
-    params.require(:corruption_case).permit(:name, :description, :stolen_amount, :place, :trial_start_at,
+    params.require(:corruption_case).permit(:name, :description, :stolen, :place, :trial_start_at,
                                             :sentenced_at, :sentence, :european_funds_project)
   end
 

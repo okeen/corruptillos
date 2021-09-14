@@ -36,7 +36,7 @@ RSpec.describe DailyCorruptionReportCreationService, type: :model do
       end
 
       it "returns the stolen_amount as third item" do
-        expect(result[2]).to eq a_case.stolen_amount
+        expect(result[2]).to eq a_case.stolen.format
       end
 
       it "returns the place as fourth item" do

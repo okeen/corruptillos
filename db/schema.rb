@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_14_212119) do
+ActiveRecord::Schema.define(version: 2021_09_14_224955) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2021_09_14_212119) do
     t.string "name"
     t.text "description"
     t.string "slug"
-    t.integer "stolen_amount"
+    t.integer "stolen_amount", default: 0
     t.text "place"
     t.datetime "trial_start_at"
     t.datetime "sentenced_at"
@@ -34,8 +34,8 @@ ActiveRecord::Schema.define(version: 2021_09_14_212119) do
 
   create_table "daily_corruption_reports", force: :cascade do |t|
     t.date "day"
-    t.integer "total_cases"
-    t.integer "total_stolen_amount"
+    t.integer "total_cases", default: 0
+    t.integer "total_stolen_amount", default: 0
     t.string "csv_file"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

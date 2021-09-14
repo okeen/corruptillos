@@ -9,7 +9,7 @@ RSpec.feature "Corruption cases CRUD", :type => :feature, has_users: true do
     {
       name: 'Name changed',
       description: 'Description changed',
-      stolen_amount: 500,
+      stolen: Money.new(500),
       place: 'Barcelona, Spain',
       trial_start_at: 2.years.ago,
       sentenced_at: 1.month.ago,
@@ -28,7 +28,7 @@ RSpec.feature "Corruption cases CRUD", :type => :feature, has_users: true do
     within "#new_corruption_case" do
       fill_in "Name", with: "New name"
       fill_in "Description", with: case_attributes[:description]
-      fill_in "Stolen amount", with: case_attributes[:stolen_amount]
+      fill_in "Stolen amount", with: Money.new(case_attributes[:stolen_amount]).to_s
       fill_in "Place", with: case_attributes[:place]
       fill_in "Trial start at", with: case_attributes[:trial_start_at]
       fill_in "Sentenced at", with: case_attributes[:sentenced_at]
@@ -42,7 +42,7 @@ RSpec.feature "Corruption cases CRUD", :type => :feature, has_users: true do
 
     expect(@new_case.name).to eq 'New name'
     expect(@new_case.description).to eq case_attributes[:description]
-    expect(@new_case.stolen_amount).to eq case_attributes[:stolen_amount]
+    expect(@new_case.stolen).to eq Money.new(case_attributes[:stolen_amount])
     expect(@new_case.place).to eq case_attributes[:place]
     expect(@new_case.trial_start_at).to eq case_attributes[:trial_start_at]
     expect(@new_case.sentenced_at).to eq case_attributes[:sentenced_at]
@@ -57,7 +57,7 @@ RSpec.feature "Corruption cases CRUD", :type => :feature, has_users: true do
       CorruptionCase.all.each do |corruption_case|
         within "tr#corruption_case_#{corruption_case.id}" do
           expect(page).to have_selector "td", text: corruption_case.name
-          expect(page).to have_selector "td", text: corruption_case.stolen_amount
+          expect(page).to have_selector "td", text: corruption_case.stolen.format
           expect(page).to have_selector "td", text: corruption_case.place
           expect(page).to have_selector "td", text: corruption_case.trial_start_at.to_s
           expect(page).to have_selector "td", text: corruption_case.sentence
@@ -73,7 +73,7 @@ RSpec.feature "Corruption cases CRUD", :type => :feature, has_users: true do
     within "#edit_corruption_case_#{@case.id}" do
       fill_in "Name", with: updated_case_attributes[:name]
       fill_in "Description", with: updated_case_attributes[:description]
-      fill_in "Stolen amount", with: updated_case_attributes[:stolen_amount]
+      fill_in "Stolen amount", with: updated_case_attributes[:stolen].to_s
       fill_in "Place", with: updated_case_attributes[:place]
       fill_in "Trial start at", with: updated_case_attributes[:trial_start_at]
       fill_in "Sentenced at", with: updated_case_attributes[:sentenced_at]
@@ -85,7 +85,7 @@ RSpec.feature "Corruption cases CRUD", :type => :feature, has_users: true do
       @case = @case.reload
       expect(@case.name).to eq updated_case_attributes[:name]
       expect(@case.description).to eq updated_case_attributes[:description]
-      expect(@case.stolen_amount).to eq updated_case_attributes[:stolen_amount]
+      expect(@case.stolen).to eq updated_case_attributes[:stolen]
       expect(@case.place).to eq updated_case_attributes[:place]
       expect(@case.trial_start_at.to_date).to eq updated_case_attributes[:trial_start_at].to_date
       expect(@case.sentenced_at.to_date).to eq updated_case_attributes[:sentenced_at].to_date

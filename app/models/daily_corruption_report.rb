@@ -1,5 +1,6 @@
 class DailyCorruptionReport < ApplicationRecord
   mount_uploader :csv_file, DailyCsvReportUploader
+  monetize :total_stolen_amount, as: :total_stolen, default: 0
 
   before_save :set_totals
 
@@ -13,6 +14,6 @@ class DailyCorruptionReport < ApplicationRecord
   def set_totals
     current_corruption_cases = corruption_cases
     self.total_cases = current_corruption_cases.count
-    self.total_stolen_amount = current_corruption_cases.sum(:stolen_amount)
+    self.total_stolen = Money.new(current_corruption_cases.sum(:stolen_amount))
   end
 end

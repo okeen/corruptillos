@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe DailyCorruptionReport, type: :model do
   fixtures(:corruption_cases)
-  subject(:report) { described_class.new }
+  subject(:report) { described_class.new(total_stolen: 0) }
 
   describe "corruption_cases" do
     let(:query_spy) { instance_double(CorruptionCasesGroupbyUserQuery, inned_joined_and_ordered_by_user: 'something') }

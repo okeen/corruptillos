@@ -31,7 +31,7 @@ class DailyCorruptionReportCreationService
     [
       corruption_case.user_id,
       corruption_case.name,
-      corruption_case.stolen_amount,
+      corruption_case.stolen.format,
       corruption_case.place
     ]
   end

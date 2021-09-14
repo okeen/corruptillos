@@ -1,7 +1,7 @@
 = simple_form_for @corruption_case, url: [:my, @corruption_case] do |f|
   = f.input :name
   = f.input :description, as: :text
-  = f.input :stolen_amount, as: :integer
+  = f.input :stolen, as: :iconed_string, label: :'Stolen amount', text_icon: '€'
   = f.input :place
   = f.input :trial_start_at, as: :integer
   = f.input :sentenced_at, as: :integer
