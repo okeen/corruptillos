@@ -17,9 +17,13 @@ class DailyCorruptionReportCreationService
 
   def csv_content(report)
     csv = CSV.open("tmp/cases-#{Time.now}.csv", "w+")
+
+    csv << [:user_id, :name, :stolen_amount, :place]
     report.corruption_cases.find_each do |corruption_case|
       csv << csv_entry(corruption_case)
     end
+
+    csv.rewind
     csv
   end
 
