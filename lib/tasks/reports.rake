@@ -1,5 +1,5 @@
 namespace :reports do
-  namespace :daily => :environment do
+  namespace :daily do
     task :create => :environment do
       DailyCorruptionReportCreationService.new(Date.today).create_report
     end
