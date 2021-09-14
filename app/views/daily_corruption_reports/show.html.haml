@@ -1,0 +1,17 @@
+
+%h1 Corruption report for #{@daily_corruption_report.day}
+
+.row.my-2
+  .col-md
+    %p
+      %strong Total cases:
+      = @daily_corruption_report.total_cases
+  .col-md
+    %p
+      %strong Total stolen:
+      = @daily_corruption_report.total_stolen_amount
+
+= link_to_report_file
+
+%h3.mt-2 Reported Cases
+= table_for_corruption_cases(@corruption_cases)

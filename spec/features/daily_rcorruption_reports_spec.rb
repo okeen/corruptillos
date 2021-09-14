@@ -24,4 +24,23 @@ RSpec.feature "Daily Corruption Reports Listing", :type => :feature do
       end
     end
   end
+
+  scenario "Visit show page of a daily report" do
+    report = DailyCorruptionReport.last
+
+    visit daily_corruption_report_path(report)
+
+    expect(page).to have_selector "p", text: "Total cases: #{report.total_cases}"
+    expect(page).to have_selector "p", text: "Total stolen: #{report.total_stolen_amount}"
+
+    within '#corruption_cases' do
+      report.corruption_cases.each do |corruption_case|
+        within "tr#corruption_case_#{corruption_case.id}" do
+          expect(page).to have_selector "td", text: corruption_case.name
+          expect(page).to have_selector "td", text: corruption_case.user&.email
+          expect(page).to have_selector "td", text: corruption_case.stolen_amount
+        end
+      end
+    end
+  end
 end
